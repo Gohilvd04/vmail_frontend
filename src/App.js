@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+// import { getUserAction } from './redux/actions/accountActions';
+import "./App.css";
+import { Toaster } from "react-hot-toast";
+
+import AppRoutes from "./routes/Routes";
+import { EmailProvider } from "./context/EmailContext";
 
 function App() {
+  // if a token exists, try to get the user data from the server,
+  // if this fetch has succeeded, App will redirect us to the emails page
+  // if this fetch failed, that means the token has expired and the user needs to login
+
+  // useEffect(() => {
+  //   if (token) {
+  //     dispatch(getUserAction());
+  //   }
+  // }, [token, dispatch]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <EmailProvider>
+      <Toaster position="top-center" reverseOrder={true} />
+      <AppRoutes />
+    </EmailProvider>
   );
 }
 
